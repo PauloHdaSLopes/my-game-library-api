@@ -68,8 +68,7 @@ public class GameForm {
 		g.setDescription(this.description);
 		g.setGenre(this.getArrayGenre());
 		g.setRatingPercent(this.getIntRatingPercent());
-		this.gameTimes.stream().forEach( t -> g.addGameTime(t.toGameTime(g)));
-		
+		this.gameTimes.forEach(t -> g.addGameTime(t.toGameTime(g)));
 		return g;
 	}
 
