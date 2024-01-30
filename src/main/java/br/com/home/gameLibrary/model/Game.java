@@ -2,6 +2,7 @@ package br.com.home.gameLibrary.model;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -29,12 +30,19 @@ public class Game {
 	private LocalDate creationDate = LocalDate.now();
 	
 	@OneToMany(mappedBy="game")
-	Set<GameTime> gameTimes;
-	
+	Set<GameTime> gameTimes = new HashSet<>();
+
 	public Game() {
-		this.gameTimes = new HashSet<GameTime>();
 	}
-	
+
+	public Game(Long id, String name, String description, String[] genre, Integer ratingPercent) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.genre = genre;
+		this.ratingPercent = ratingPercent;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -101,15 +109,12 @@ public class Game {
 		
 		return aux;
 	}
-	
+	public void addGameTime(List<GameTime> g) {
+		g.forEach(this::addGameTime);
+	}
 	public void addGameTime(GameTime gameTime) {
 		this.gameTimes.add(gameTime);
 	}
-	
-	public void setGameTimes(Set<GameTime> gameTimes) {
-		this.gameTimes = gameTimes;
-	}
-	
 	@Override
 	public String toString() {
 		return "Game{name: " + this.name + 

@@ -1,5 +1,7 @@
 package br.com.home.gameLibrary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -19,6 +21,7 @@ public class GameTime {
 	private String name;
 	private Integer timeInHours;
 	private LocalDate creationDate = LocalDate.now();
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name="game_id", nullable=false)
     private Game game;
@@ -27,10 +30,9 @@ public class GameTime {
 		
 	}
 	
-	public GameTime(String name, Integer timeInHours, Game game) {
+	public GameTime(String name, Integer timeInHours) {
 		this.name = name;
 		this.timeInHours = timeInHours;
-		this.game = game;
 	}
 	
 	public long getId() {

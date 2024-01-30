@@ -30,7 +30,9 @@ public class GameTimeForm {
 	
 	public GameTime toGameTime(Game game) {
 		Integer time = Integer.valueOf(this.timeInHours);
-		return new GameTime(this.name, time, game);
+		GameTime gameTime = new GameTime(this.name, time);
+		gameTime.setGame(game);
+		return gameTime;
 	}
 
 	@Override
